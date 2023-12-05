@@ -1,19 +1,33 @@
 import asyncio
 import logging
 import sys
-from aiogram import Bot
-from aiogram.enums import ParseMode
 
-from src.bot.bot import dp, TOKEN
+from src.bot.bot import dp, bot
+from src.hh.api import HHApi
+
+
+async def foo():
+    try:
+        hh = HHApi()
+        while True:
+            await hh.vacancies_list()
+            logging.debug("Ищем подходящие вакансии...")
+    except Exception as e:
+        logging.error(f'Ошибка функции foo(): {e}')
 
 
 async def main() -> None:
-    # Initialize Bot instance with a default parse mode which will be passed to all API calls
-    bot = Bot(TOKEN, parse_mode=ParseMode.HTML)
-    # And the run events dispatching
-    await dp.start_polling(bot)
+    try:
+        while True:
+            asyncio.create_task(dp.start_polling(bot))
+            await foo()
+    except Exception as e:
+        logging.error(f'Ошибка функции main(): {e}')
 
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO, stream=sys.stdout)
-    asyncio.run(main())
+    try:
+        logging.basicConfig(level=logging.DEBUG, stream=sys.stdout)
+        asyncio.run(main())
+    except Exception as e:
+        logging.error(f'Ошибка запуска бота: {e}')
