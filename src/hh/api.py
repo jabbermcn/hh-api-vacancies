@@ -93,7 +93,7 @@ class HHApi(object):
                               f'({timestamp}), посмотреть по ссылке:' \
                               f' \n{alternate_url}.'
                     await bot.send_message(chat_id=os.getenv('CHAT_ID'), text=message, parse_mode='Markdown')
-                    await asyncio.sleep(10)
+                    await asyncio.sleep(10)  # API hh.ru приниимает не больше 20 запросов в минуту
 
         except Exception as e:
             logging.error(f'Ошибка получения списка вакансий: {e}')
