@@ -29,7 +29,6 @@ class HHApi(object):
         'Content-Type': 'application/json',
         'User-Agent': 'PostmanRuntime/7.33.0',
     }
-    vacancies_requests = []
 
     @staticmethod
     def create_session(func):
