@@ -15,5 +15,9 @@ This application interacts with the HH.ru API to retrieve a list of vacancies ba
 
 ## Usage
 
-1. Install the required dependencies:
+1. git clone https://github.com/jabbermcn/hh-api-vacancies.git
+
+2. Install the required dependencies:
    pip install -r requirements.txt
+
+3. Fill .env file using your values of BOT_TOKEN='' and CHAT_ID=''.
