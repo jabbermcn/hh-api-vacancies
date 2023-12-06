@@ -11,9 +11,9 @@ async def foo():
     try:
         hh = HHApi()
         while True:
-            await hh.vacancies_list()
             logging.debug("Ищем подходящие вакансии...")
-            await asyncio.sleep(15)
+            await hh.vacancies_list()
+            await asyncio.sleep(30)
     except Exception as e:
         logging.error(f'Ошибка функции foo(): {e}', exc_info=True)
 

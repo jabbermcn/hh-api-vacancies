@@ -62,7 +62,7 @@ class HHApi(object):
             with open('requests_ids.json', 'r') as file:
                 requests_ids = json.load(file)
         except FileNotFoundError:
-            requests_ids = set()
+            requests_ids = list()
         return requests_ids
 
     @classmethod
@@ -84,7 +84,7 @@ class HHApi(object):
                 alternate_url = item['alternate_url']
 
                 if vacancy_id not in requests_ids:
-                    requests_ids.add(vacancy_id)
+                    requests_ids.append(vacancy_id)
                     self.save_requests_ids(requests_ids)
 
                     timestamp = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
@@ -92,7 +92,7 @@ class HHApi(object):
                               f'({timestamp}), посмотреть по ссылке:' \
                               f' \n{alternate_url}.'
                     await bot.send_message(chat_id=os.getenv('CHAT_ID'), text=message, parse_mode='Markdown')
-                    await asyncio.sleep(10)
+                    await asyncio.sleep(15)
 
         except Exception as e:
             logging.error(f'Ошибка получения списка вакансий: {e}')
